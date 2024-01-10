@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Account settings{% endblock %}
+{% block content %}
+<section class="flex justify-center items-center h-screen bg-white">
+    <div class="max-w-md w-full bg-gray-100 rounded p-6 space-y-4"><br><br>
+      <form method="POST">
+        <div class="mb-4">
+            <p class="text-gray-600">Password setting</p>
+            <h2 class="text-xl font-bold text-black">Change your account password here!</h2>
+        </div>
+        <div>
+            <input class="w-full p-4 text-sm bg-gray-50 focus:outline-none border border-gray-200 rounded text-gray-600" type="password" id="password" name="password" placeholder="Current password" required>
+        </div><br>
+        <div>
+            <input class="w-full p-4 text-sm bg-gray-50 focus:outline-none border border-gray-200 rounded text-gray-600" type="password" id="new_password" name="new_password" placeholder="New password" required>
+            {% if message %}
+            <p class="text-gray-600 text-xs mt-2 mb-4">{{ message }}</p>
+            {% endif %}
+          </div><br>
+        <div>
+            <button type="submit" class="w-full py-4 bg-blue-600 hover:bg-blue-700 rounded text-sm font-bold text-gray-50 transition duration-200">Change Password</button>
+        </div>
+        <div class="mt-4">
+          <p class="text-left text-blue-600"><a href={{ url_for('views.pref') }}>Back to preferences</a></p>
+        </div>
+      </form>
+    </div>
+  </section>
+{% endblock %}

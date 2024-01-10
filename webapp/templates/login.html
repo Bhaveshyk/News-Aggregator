@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Login{% endblock %}
+{% block content %}
+<section class="flex justify-center items-center h-screen bg-white">
+  <div class="max-w-md w-full bg-gray-100 rounded p-6 space-y-4"><br><br>
+    <form method="POST">
+      <div class="mb-4">
+          <p class="text-gray-600">Login</p>
+          <h2 class="text-xl font-bold text-black">Login to your account here!</h2>
+      </div>
+      <div>
+          <input class="w-full p-4 text-sm bg-gray-50 focus:outline-none border border-gray-200 rounded text-gray-600" type="email" id="email" name="email" placeholder="Email" required>
+      </div><br>
+      <div>
+          <input class="w-full p-4 text-sm bg-gray-50 focus:outline-none border border-gray-200 rounded text-gray-600" type="password" id="password" name="password" placeholder="Password" required>
+          {% if message %}
+          <p class="text-gray-600 text-xs mt-2 mb-4">{{ message }}</p>
+          {% endif %}
+          <div><br>
+          <button type="submit" class="w-full py-4 bg-blue-600 hover:bg-blue-700 rounded text-sm font-bold text-gray-50 transition duration-200">Login</button>
+      </div>
+      <div class="mt-4">
+        <p class="text-left text-blue-600"><span class="text-black">Not registered?</span> <a href={{ url_for('auth.signup') }}>Create account</a></p>
+      </div>
+    </form>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>{% block title %}Home{% endblock %}</title>
+</head>
+<body>
+    <header class="text-gray-700 bg-gray-100 body-font">
+      <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+        <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0" href={{ url_for('views.home') }}>
+          <span class="ml-3 text-xl">Newsly</span>
+        </a>
+
+        {% if user.is_authenticated %}
+        <nav class="md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-300 flex flex-wrap items-center text-base justify-center">
+          {% if preferences %}
+            {% for preference in preferences %}
+              <a class="mr-5 hover:text-gray-900" href={{ preference.cat|lower }}>{{ preference.cat }}</a>
+            {% endfor %}
+          {% else %}
+            {% for category in ['National', 'World', 'Sports', 'Entertainment', 'Business', 'Technology', 'Politics'] %}
+            <a class="mr-5 hover:text-gray-900" href={{ category|lower }}>{{ category }}</a>
+            {% endfor %}
+          {% endif %}
+        </nav>
+        {% if user.isadmin %}
+          <a href={{ url_for('views.admin_panel') }}
+            <button class="inline-flex items-center border-0 py-1 px-3 focus:outline-none hover:bg-gray-300 rounded text-base mt-4 md:mt-0">Admin
+            </button>
+          </a>
+        {% endif %}
+        <a href={{ url_for('views.pref') }}
+          <button class="inline-flex items-center border-0 py-1 px-3 focus:outline-none hover:bg-gray-300 rounded text-base mt-4 md:mt-0">Account
+          </button>
+        </a>
+        <a href={{ url_for('auth.logout') }}
+          <button class="inline-flex items-center border-0 py-1 px-3 focus:outline-none hover:bg-gray-300 rounded text-base mt-4 md:mt-0">Logout!
+          </button>
+        </a>
+        {% else %}
+        <nav class="md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-300	flex flex-wrap items-center text-base justify-center">
+          <a class="mr-5 hover:text-gray-900" href="/">Home</a>
+        </nav>
+        <a href={{ url_for('auth.login') }}
+          <button class="inline-flex items-center border-0 py-1 px-3 focus:outline-none hover:bg-gray-300 rounded text-base mt-4 md:mt-0">Login!
+              <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
+              <path d="M5 12h14M12 5l7 7-7 7"></path>
+              </svg>
+          </button>
+        </a>
+        <a href={{ url_for('auth.signup') }}
+          <button class="inline-flex items-center border-0 py-1 px-3 focus:outline-none hover:bg-gray-300 rounded text-base mt-4 md:mt-0">Sign Up!
+              <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
+              <path d="M5 12h14M12 5l7 7-7 7"></path>
+              </svg>
+          </button>
+        </a>
+        {% endif %}
+      </div>
+    </header>
+    {% block content %}
+    {% endblock %}
+    <footer class="bg-gray-200 text-gray-700 text-center py-4">
+        Made with ❤️ by Vivek, Bhavesh, Dweep.
+    </footer>
+    <script>
+      if ( window.history.replaceState ) {
+      window.history.replaceState( null, null, window.location.href );
+      }
+    </script>
+</body>
+</html>

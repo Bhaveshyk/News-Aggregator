@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Newsly{% endblock %}
+{% block content %}
+<section class="text-gray-700 body-font bg-gray-100">
+    <div class="container px-5 py-24 mx-auto">
+      <div class="flex flex-col text-center w-full mb-20">
+        <h2 class="text-xs text-indigo-400 tracking-widest font-medium title-font mb-1">ADMIN PANEL</h2>
+        <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Manage Users</h1>
+      </div>
+      <div class="flex flex-wrap">
+        {% for user in users %}
+        <div class="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-6 border-l-2 border-gray-300">
+            <h2 class="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2">{{ user.email }}</h2>
+            <p class="leading-relaxed text-base mb-4">Admin Status: {{ user.isadmin }}</p>
+            <a class="text-indigo-400 inline-flex items-center pe-3" href={{ url_for('views.delete_user', id=user.id) }}>Delete user!</a>
+            {% if user.isadmin %}
+            <a class="text-indigo-400 inline-flex items-center" href={{ url_for('views.remove_admin', id=user.id) }}>Remove admin!</a>
+            {% else %}
+                <a class="text-indigo-400 inline-flex items-center" href={{ url_for('views.make_admin', id=user.id) }}>Make admin!</a>
+            {% endif %}
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{% endblock %}

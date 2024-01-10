@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Newsly{% endblock %}
+{% block content %}
+<section class="flex justify-center items-center h-screen bg-white">
+    <div class="max-w-md w-full bg-gray-100 rounded p-6 space-y-4"><br><br>
+      <form method="POST">
+        <div class="mb-4">
+            <p class="text-gray-600">Preferences</p>
+            <h2 class="text-xl font-bold text-black">Edit your news preferences here!</h2>
+        </div>
+        <div>
+            <label for="countries" class="block mb-2 text-sm font-medium text-gray-900">Add a preference</label>
+            <select id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" id="add" name="add">
+            <option selected>Choose a preference</option>
+            {% for cat in add_cats %}
+            <option value={{ cat }}>{{ cat }}</option>
+            {% endfor %}
+            </select>
+        </div><br>
+        <div>
+            <label for="countries" class="block mb-2 text-sm font-medium text-gray-900">Remove a preference</label>
+            <select id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" id="rem" name="rem">
+            <option selected>Choose a preference</option>
+            {% for cat in rem_cats %}
+            <option value={{ cat }}>{{ cat }}</option>
+            {% endfor %}
+            </select>
+        </div><br>
+        <div>
+            <button type="submit" class="w-full py-4 bg-blue-600 hover:bg-blue-700 rounded text-sm font-bold text-gray-50 transition duration-200">Make changes</button>
+        </div>
+        <div class="mt-4">
+            <p class="text-left text-blue-600"><a href={{ url_for('auth.change_pass') }}>Change your password here!</a></p>
+        </div>
+      </form>
+    </div>
+</section>
+{% endblock %}
